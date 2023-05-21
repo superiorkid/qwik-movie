@@ -120,7 +120,7 @@ export default component$(() => {
               </div>
 
               {/* other side */}
-              <div class="w-[311px] text-right text-white flex flex-col space-y-2.5 justify-end">
+              <div class="w-[350px] text-right text-white flex flex-col space-y-2.5 justify-end">
                 {isMovie && (
                   <p>
                     {director.length > 1 ? director.join(", ") : director[0]}:{" "}
@@ -150,7 +150,7 @@ export default component$(() => {
                 </p>
                 <p>
                   {movie.value.spoken_languages
-                    .map((language) => language.name)
+                    .map((language) => language.english_name)
                     .join(", ")}{" "}
                   : <span class="text-yellow-400">Language</span>
                 </p>

@@ -7,7 +7,7 @@ interface MovieCategoriesProps {
   label: string;
   moviesLength: number;
   movies: TMovies[];
-  media_type: "movie" | "tv";
+  media_type?: "movie" | "tv";
 }
 
 const MovieCategories = component$(
@@ -25,7 +25,8 @@ const MovieCategories = component$(
                   ? movie.release_date
                   : movie.first_air_date
               }
-              image_path={movie.backdrop_path}
+              media_type={media_type}
+              movieId={movie.id}
             />
           ))}
         </div>

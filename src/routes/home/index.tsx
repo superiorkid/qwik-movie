@@ -1,39 +1,45 @@
-import { component$ } from "@builder.io/qwik";
-import { type DocumentHead, server$ } from "@builder.io/qwik-city";
-import MovieCategories from "~/components/Homepage/MovieCategories";
+import { component$, useStyles$, useVisibleTask$ } from "@builder.io/qwik";
+import { routeLoader$ } from "@builder.io/qwik-city";
+import { type DocumentHead } from "@builder.io/qwik-city";
+import Swiper from "swiper";
 
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzM0YjEzOGJlY2M3MTY5NTk3MWMxNWEyZjNhMTMwOCIsInN1YiI6IjYyOGYzNTcxZDQ4Y2VlNmNiNDQ3Zjg5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_XqqG5aN3fzPfekZ5MRyPI5ZFL-s6Q2ZtTvyf03gU4",
-  },
-};
+import swiperStyle from "swiper/swiper.css?inline";
+import Container from "~/components/Container";
 
-// export const getTrending = server$(async () => {
-//   const res = await fetch(
-//     "https://api.themoviedb.org/3/trending/all/6h?language=en-US",
-//     options
-//   )
+export default component$(() => {
+  useStyles$(swiperStyle);
 
-//   if (!res.ok) {
-
-//   }
-// });
-
-export default component$(async () => {
-  // const trending = await getTrending();
-  // console.log(trending);
+  useVisibleTask$(() => {
+    const swiper = new Swiper(".swiper", {
+      direction: "horizontal",
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  });
 
   return (
-    <div class="mt-8 flex flex-col space-y-6 md:space-y-3">
-      <MovieCategories moviesLength={5} label="Trending" />
-      <MovieCategories moviesLength={5} label="Upcoming" />
-      <MovieCategories moviesLength={5} label="Recommended" />
-      <MovieCategories moviesLength={5} label="In Theatre" />
-      <MovieCategories moviesLength={5} label="Featured Today" />
-    </div>
+    <Container>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">Slide 1</div>
+          <div class="swiper-slide">Slide 2</div>
+          <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-button-prev">prev</div>
+        <div class="swiper-button-next">next</div>
+      </div>
+    </Container>
+
+    // <div class="mt-8 flex flex-col space-y-6 md:space-y-3">
+    //   <MovieCategories moviesLength={5} label="Trending" />
+    //   <MovieCategories moviesLength={5} label="Upcoming" />
+    //   <MovieCategories moviesLength={5} label="Recommended" />
+    //   <MovieCategories moviesLength={5} label="In Theatre" />
+    //   <MovieCategories moviesLength={5} label="Featured Today" />
+    // </div>
   );
 });
 
@@ -46,3 +52,5 @@ export const head: DocumentHead = {
     },
   ],
 };
+
+export const useTrending = routeLoader$(async (requestEvent) => {});

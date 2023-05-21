@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@qwikest/icons": "^0.0.8",
-    "qwik-image": "^0.0.4"
+    "qwik-image": "^0.0.4",
+    "swiper": "^9.3.2"
   }
 }

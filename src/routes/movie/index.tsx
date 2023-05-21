@@ -31,7 +31,7 @@ export default component$(() => {
         <div class="mt-8 flex flex-col space-y-6 md:space-y-3">
           <MovieCategories
             label="Movies"
-            moviesLength={15}
+            moviesLength={movies.value.length}
             movies={movies.value}
             media_type={media_type}
           />
