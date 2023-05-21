@@ -1,13 +1,13 @@
 import { component$ } from "@builder.io/qwik";
-import { type DocumentHead, routeLoader$ } from "@builder.io/qwik-city";
 import Container from "~/components/Container";
-import MovieCategories from "~/components/Homepage/MovieCategories";
 import Navbar from "~/components/Navbar/Navbar";
+import MovieCategories from "~/components/Homepage/MovieCategories";
+import { routeLoader$ } from "@builder.io/qwik-city";
 import type { TMovies } from "~/routes";
 
-export const useMovies = routeLoader$(async (requestEvent) => {
+export const useTvs = routeLoader$(async (requestEvent) => {
   const res = await fetch(
-    "https://api.themoviedb.org/3/trending/movie/week?language=en-US",
+    "https://api.themoviedb.org/3/trending/tv/week?language=en-US",
     {
       method: "GET",
       headers: {
@@ -22,8 +22,8 @@ export const useMovies = routeLoader$(async (requestEvent) => {
 });
 
 export default component$(() => {
-  const movies = useMovies();
-  const media_type = "movie";
+  const tvs = useTvs();
+  const media_type = "tv";
   return (
     <div class="my-8">
       <Container>
@@ -32,7 +32,7 @@ export default component$(() => {
           <MovieCategories
             label="Movies"
             moviesLength={15}
-            movies={movies.value}
+            movies={tvs.value}
             media_type={media_type}
           />
         </div>
@@ -40,13 +40,3 @@ export default component$(() => {
     </div>
   );
 });
-
-export const head: DocumentHead = {
-  title: "Movie | Qwik Movie",
-  meta: [
-    {
-      name: "description",
-      content: "list of popular tv show,",
-    },
-  ],
-};

@@ -20,7 +20,7 @@ const navItem: IRouter[] = [
   },
   {
     label: "TV Shows",
-    href: "/tv-show",
+    href: "/tv",
   },
 ];
 

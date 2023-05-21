@@ -1,26 +1,32 @@
 import { component$ } from "@builder.io/qwik";
 import MovieCard from "../MovieCard";
+import { TMovies } from "~/routes";
+import movie from "~/routes/movie";
 
 interface MovieCategoriesProps {
-  category: string;
+  label: string;
   moviesLength: number;
+  movies: TMovies[];
+  media_type: "movie" | "tv";
 }
 
 const MovieCategories = component$(
-  ({ category, moviesLength }: MovieCategoriesProps) => {
-    const movies = Array.from(Array(moviesLength), (_, index) => ({
-      id: index,
-      key: "value",
-    }));
-
+  ({ label, moviesLength, movies, media_type }: MovieCategoriesProps) => {
     return (
       <div>
-        <h1 class="font-semibold text-2xl md:text-3xl text-white">
-          {category}
-        </h1>
+        <h1 class="font-semibold text-2xl md:text-3xl text-white">{label}</h1>
         <div class={`grid grid-cols-1 md:grid-cols-5 gap-6 mt-1.5`}>
-          {movies.map((i) => (
-            <MovieCard key={i.id} />
+          {movies.slice(0, moviesLength).map((movie) => (
+            <MovieCard
+              key={movie.id}
+              title={media_type === "movie" ? movie.title : movie.name}
+              date={
+                media_type === "movie"
+                  ? movie.release_date
+                  : movie.first_air_date
+              }
+              image_path={movie.backdrop_path}
+            />
           ))}
         </div>
       </div>
