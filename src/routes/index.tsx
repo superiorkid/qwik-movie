@@ -9,7 +9,6 @@ import {
   routeLoader$,
   useNavigate,
 } from "@builder.io/qwik-city";
-import { Image } from "qwik-image";
 
 // local importsx
 import Container from "~/components/Container";
