@@ -78,11 +78,6 @@ export default component$(() => {
     }
   });
 
-  useVisibleTask$(() => {
-    const url = import.meta.env.TMDB_ACCESS_TOKEN;
-    console.log(url);
-  });
-
   const getYear = (date: string) => {
     const newDate = new Date(date);
     const year = newDate.getFullYear();
