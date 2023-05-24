@@ -9,6 +9,7 @@ import {
   routeLoader$,
   useNavigate,
 } from "@builder.io/qwik-city";
+import { Image } from "qwik-image";
 
 // local importsx
 import Container from "~/components/Container";
@@ -58,23 +59,21 @@ export default component$(() => {
     const controller = new AbortController();
     cleanup(() => controller.abort());
 
-    if (isMovieType) {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/${
-          popularMovie.value[position.value].media_type
-        }/${popularMovie.value[position.value].id}?language=en-US`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
-          },
-          signal: controller.signal,
-        }
-      );
-      const movie: TMovieById | ITVs = await res.json();
-      return movie;
-    }
+    const res = await fetch(
+      `https://api.themoviedb.org/3/${
+        popularMovie.value[position.value].media_type
+      }/${popularMovie.value[position.value].id}?language=en-US`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzM0YjEzOGJlY2M3MTY5NTk3MWMxNWEyZjNhMTMwOCIsInN1YiI6IjYyOGYzNTcxZDQ4Y2VlNmNiNDQ3Zjg5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_XqqG5aN3fzPfekZ5MRyPI5ZFL-s6Q2ZtTvyf03gU4`,
+        },
+        signal: controller.signal,
+      }
+    );
+    const movie: TMovieById | ITVs = await res.json();
+    return movie;
   });
 
   const getYear = (date: string) => {
@@ -107,8 +106,6 @@ export default component$(() => {
             {/*<Image*/}
             {/*  layout="fullWidth"*/}
             {/*  objectFit="cover"*/}
-            {/*  // width={500}*/}
-            {/*  // height={500}*/}
             {/*  src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}*/}
             {/*  class="w-full h-full brightness-75"*/}
             {/*  alt={`${isMovieType ? movie.title : movie.name} image`}*/}
