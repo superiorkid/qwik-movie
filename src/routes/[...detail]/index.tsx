@@ -22,7 +22,7 @@ export const useMovieDetail = routeLoader$(async (requestEvent) => {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzM0YjEzOGJlY2M3MTY5NTk3MWMxNWEyZjNhMTMwOCIsInN1YiI6IjYyOGYzNTcxZDQ4Y2VlNmNiNDQ3Zjg5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_XqqG5aN3fzPfekZ5MRyPI5ZFL-s6Q2ZtTvyf03gU4`,
+        Authorization: `Bearer ${requestEvent.env.get("TMDB_ACCESS_TOKEN")}`,
       },
     }
   );
@@ -41,7 +41,7 @@ export const useMovieImage = routeLoader$(async (requestEvent) => {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzM0YjEzOGJlY2M3MTY5NTk3MWMxNWEyZjNhMTMwOCIsInN1YiI6IjYyOGYzNTcxZDQ4Y2VlNmNiNDQ3Zjg5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_XqqG5aN3fzPfekZ5MRyPI5ZFL-s6Q2ZtTvyf03gU4`,
+        Authorization: `Bearer ${requestEvent.env.get("TMDB_ACCESS_TOKEN")}`,
       },
     }
   );
@@ -60,7 +60,7 @@ export const useCredits = routeLoader$(async (requestEvent) => {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzM0YjEzOGJlY2M3MTY5NTk3MWMxNWEyZjNhMTMwOCIsInN1YiI6IjYyOGYzNTcxZDQ4Y2VlNmNiNDQ3Zjg5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_XqqG5aN3fzPfekZ5MRyPI5ZFL-s6Q2ZtTvyf03gU4`,
+        Authorization: `Bearer ${requestEvent.env.get("TMDB_ACCESS_TOKEN")}`,
       },
     }
   );

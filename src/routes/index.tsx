@@ -43,7 +43,7 @@ export type TMovies = Pick<
   | "vote_average"
   | "vote_count"
 >;
-type TMovieById = Omit<IMovie, "media_type" | "genres_ids">;
+export type TMovieById = Omit<IMovie, "media_type" | "genres_ids">;
 
 export default component$(() => {
   const nav = useNavigate();
@@ -70,6 +70,7 @@ export default component$(() => {
           headers: {
             Accept: "application/json",
             Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzM0YjEzOGJlY2M3MTY5NTk3MWMxNWEyZjNhMTMwOCIsInN1YiI6IjYyOGYzNTcxZDQ4Y2VlNmNiNDQ3Zjg5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_XqqG5aN3fzPfekZ5MRyPI5ZFL-s6Q2ZtTvyf03gU4`,
+            // Authorization: `Bearer ${import.meta.env.TMDB_ACCESS_TOKEN}`,
           },
           signal: controller.signal,
         }
