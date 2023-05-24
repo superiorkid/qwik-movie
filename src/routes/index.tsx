@@ -1,10 +1,9 @@
-// TODO: FUTURE FIX THE MOVIE TYPE
-
 import {
   component$,
   Resource,
   useResource$,
   useSignal,
+  useVisibleTask$,
 } from "@builder.io/qwik";
 import {
   type DocumentHead,
@@ -69,8 +68,7 @@ export default component$(() => {
           method: "GET",
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNzM0YjEzOGJlY2M3MTY5NTk3MWMxNWEyZjNhMTMwOCIsInN1YiI6IjYyOGYzNTcxZDQ4Y2VlNmNiNDQ3Zjg5MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M_XqqG5aN3fzPfekZ5MRyPI5ZFL-s6Q2ZtTvyf03gU4`,
-            // Authorization: `Bearer ${import.meta.env.TMDB_ACCESS_TOKEN}`,
+            Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
           },
           signal: controller.signal,
         }
@@ -78,6 +76,11 @@ export default component$(() => {
       const movie: TMovieById | ITVs = await res.json();
       return movie;
     }
+  });
+
+  useVisibleTask$(() => {
+    const url = import.meta.env.TMDB_ACCESS_TOKEN;
+    console.log(url);
   });
 
   const getYear = (date: string) => {
@@ -133,6 +136,7 @@ export default component$(() => {
                         ? (movie as TMovieById).title
                         : (movie as ITVs).name}
                     </h1>
+                    <p>{import.meta.env.PUBLIC_SECRET_KEY}</p>
                     <div class="flex flex-col space-y-2 mt-1">
                       <div class="flex space-x-3">
                         <span class="text-white text-sm">
