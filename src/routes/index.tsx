@@ -3,7 +3,6 @@ import {
   Resource,
   useResource$,
   useSignal,
-  useVisibleTask$,
 } from "@builder.io/qwik";
 import {
   type DocumentHead,
