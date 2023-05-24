@@ -4,6 +4,7 @@ import { Image } from "qwik-image";
 interface ActresCardProps {
   name: string;
   image: string;
+  castId: number;
 }
 
 const ActresCard = component$(({ name, image }: ActresCardProps) => {
@@ -13,7 +14,7 @@ const ActresCard = component$(({ name, image }: ActresCardProps) => {
         layout="fixed"
         src={`https://image.tmdb.org/t/p/original${image}`}
         loading="lazy"
-        class="h-full w-full rounded-md"
+        class="h-full w-full rounded-md brightness-75 hover:brightness-100"
         placeholder="#e6e6e6"
         alt={`${name} Image`}
       />

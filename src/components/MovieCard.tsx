@@ -1,9 +1,8 @@
 import { component$, Resource, useResource$ } from "@builder.io/qwik";
-import { LuStar } from "@qwikest/icons/lucide";
 import { Image } from "qwik-image";
-import { Link, routeLoader$ } from "@builder.io/qwik-city";
-import * as trace_events from "trace_events";
-import { IImagesFormat } from "~/typing/IMovies";
+import { Link } from "@builder.io/qwik-city";
+import type { IImagesFormat } from "~/typing/IMovies";
+import MaterialSymbolsStarRate from "~/components/icons/MaterialSymbolsStarRate";
 
 interface MovieCardProps {
   title: string;
@@ -67,7 +66,7 @@ const MovieCard = component$(
           </div>
           <div class="mt-0.5 flex justify-between">
             <span class="flex items-center text-sm text-white">
-              <LuStar class="fill-yellow-400 text-yellow-400 text-sm mr-1" />{" "}
+              <MaterialSymbolsStarRate class="text-yellow-400 text-sm mr-1" />
               7.5
             </span>
             <span class="text-sm text-white">{getYear(date)}</span>

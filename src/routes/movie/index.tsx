@@ -5,22 +5,6 @@ import MovieCategories from "~/components/Homepage/MovieCategories";
 import Navbar from "~/components/Navbar/Navbar";
 import type { TMovies } from "~/routes";
 
-export const useMovies = routeLoader$(async (requestEvent) => {
-  const res = await fetch(
-    "https://api.themoviedb.org/3/trending/movie/week?language=en-US",
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${requestEvent.env.get("TMDB_ACCESS_TOKEN")}`,
-      },
-    }
-  );
-
-  const { results } = await res.json();
-  return results as TMovies[];
-});
-
 export default component$(() => {
   const movies = useMovies();
   const media_type = "movie";
@@ -50,3 +34,19 @@ export const head: DocumentHead = {
     },
   ],
 };
+
+export const useMovies = routeLoader$(async (requestEvent) => {
+  const res = await fetch(
+    "https://api.themoviedb.org/3/trending/movie/week?language=en-US",
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${requestEvent.env.get("TMDB_ACCESS_TOKEN")}`,
+      },
+    }
+  );
+
+  const { results } = await res.json();
+  return results as TMovies[];
+});

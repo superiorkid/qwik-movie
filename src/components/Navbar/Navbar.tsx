@@ -11,10 +11,6 @@ export interface IRouter {
 
 const navItem: IRouter[] = [
   {
-    label: "Home",
-    href: "/home",
-  },
-  {
     label: "Movies",
     href: "/movie",
   },

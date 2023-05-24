@@ -1,13 +1,13 @@
 import { component$ } from "@builder.io/qwik";
 import MovieCard from "../MovieCard";
-import { TMovies } from "~/routes";
-import movie from "~/routes/movie";
+import type { TMovies } from "~/routes";
+import type { ITVs } from "~/typing/ITVs";
 
 interface MovieCategoriesProps {
   label: string;
   moviesLength: number;
-  movies: TMovies[];
-  media_type?: "movie" | "tv";
+  movies: TMovies[] | ITVs[];
+  media_type: "movie" | "tv";
 }
 
 const MovieCategories = component$(
@@ -19,11 +19,15 @@ const MovieCategories = component$(
           {movies.slice(0, moviesLength).map((movie) => (
             <MovieCard
               key={movie.id}
-              title={media_type === "movie" ? movie.title : movie.name}
+              title={
+                media_type === "movie"
+                  ? (movie as TMovies).title
+                  : (movie as ITVs).name
+              }
               date={
                 media_type === "movie"
-                  ? movie.release_date
-                  : movie.first_air_date
+                  ? (movie as TMovies).release_date
+                  : (movie as ITVs).first_air_date
               }
               media_type={media_type}
               movieId={movie.id}

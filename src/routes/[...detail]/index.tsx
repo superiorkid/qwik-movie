@@ -4,12 +4,13 @@ import {
   routeLoader$,
   useLocation,
 } from "@builder.io/qwik-city";
-import { LuStar, LuStarHalf } from "@qwikest/icons/lucide";
 import { Image } from "qwik-image";
 import Container from "~/components/Container";
 import Navbar from "~/components/Navbar/Navbar";
 import ActresCard from "~/components/ActresCard";
 import type { IImagesFormat, IMovie, IMovieCredit } from "~/typing/IMovies";
+import MaterialSymbolsStarRate from "~/components/icons/MaterialSymbolsStarRate";
+import MaterialSymbolsStarRateHalf from "~/components/icons/MaterialSymbolsStarRateHalf";
 
 export const useMovieDetail = routeLoader$(async (requestEvent) => {
   const params = requestEvent.params.detail;
@@ -30,7 +31,7 @@ export const useMovieDetail = routeLoader$(async (requestEvent) => {
   return movie as IMovie;
 });
 
-const useMovieImage = routeLoader$(async (requestEvent) => {
+export const useMovieImage = routeLoader$(async (requestEvent) => {
   const params = requestEvent.params.detail;
   const [media_type, movieId] = params.split("/");
 
@@ -49,7 +50,7 @@ const useMovieImage = routeLoader$(async (requestEvent) => {
   return backdrops as IImagesFormat[];
 });
 
-const useCredits = routeLoader$(async (requestEvent) => {
+export const useCredits = routeLoader$(async (requestEvent) => {
   const params = requestEvent.params.detail;
   const [media_type, movieId] = params.split("/");
 
@@ -70,7 +71,7 @@ const useCredits = routeLoader$(async (requestEvent) => {
 
 export default component$(() => {
   const params = useLocation().params.detail;
-  const [media_type, movieId] = params.split("/");
+  const [media_type] = params.split("/");
 
   const movie = useMovieDetail();
   const backdrops = useMovieImage();
@@ -133,10 +134,13 @@ export default component$(() => {
                 </p>
                 <p class="flex justify-end items-center">
                   {[1, 2, 3, 4].map((i) => (
-                    <LuStar key={i} class="fill-yellow-400 text-yellow-400" />
+                    <MaterialSymbolsStarRate
+                      key={i}
+                      class="text-yellow-400 text-lg"
+                    />
                   ))}
-                  <LuStarHalf class="fill-yellow-400 text-yellow-400" /> :{" "}
-                  <span class="text-yellow-400">Rating</span>
+                  <MaterialSymbolsStarRateHalf class="text-yellow-400 text-lg" />
+                  : <span class="text-yellow-400">Rating</span>
                 </p>
                 <p>
                   {movie.value.genres.map((genre) => genre.name).join(", ")} :{" "}
@@ -170,6 +174,7 @@ export default component$(() => {
                     key={cast.id}
                     name={cast.name}
                     image={cast.profile_path}
+                    castId={cast.id}
                   />
                 ))}
               </div>
@@ -181,7 +186,7 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ resolveValue, params }) => {
+export const head: DocumentHead = ({ resolveValue }) => {
   const movie = resolveValue(useMovieDetail);
   return {
     title: `${movie.title} | Qwik Movie`,

@@ -40,8 +40,6 @@
     "vite-tsconfig-paths": "4.2.0"
   },
   "dependencies": {
-    "@qwikest/icons": "^0.0.8",
-    "qwik-image": "^0.0.4",
-    "swiper": "^9.3.2"
+    "qwik-image": "^0.0.4"
   }
 }

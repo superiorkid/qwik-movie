@@ -1,5 +1,5 @@
 import { $, component$, Slot } from "@builder.io/qwik";
-import { ImageTransformerProps, useImageProvider } from "qwik-image";
+import { type ImageTransformerProps, useImageProvider } from "qwik-image";
 
 export default component$(() => {
   const imageTransformer$ = $(
@@ -9,7 +9,7 @@ export default component$(() => {
   );
 
   useImageProvider({
-    resolutions: [640],
+    resolutions: [960],
     imageTransformer$,
   });
 
